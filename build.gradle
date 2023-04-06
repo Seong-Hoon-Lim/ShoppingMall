@@ -1,7 +1,17 @@
+//querydsl 추가
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.10'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+
+	//querydsl 추가
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.shoppingmall'
@@ -14,12 +24,6 @@ configurations {
 	}
 }
 
-jar {
-	manifest {
-		attributes 'Main-Class': 'com.shoppingmall.ShoppingmallApplication'
-	}
-}
-
 repositories {
 	mavenCentral()
 }
@@ -28,33 +32,35 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testImplementation 'org.springframework.security:spring-security-test:${spring-security.version}'
+	implementation 'org.springframework.boot:spring-boot-devtools'
 
 	/* Thymeleaf */
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	/* Lombok */
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	/* Log4j2 */
-	implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
-	implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
-
-
 	/* JPA */
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.querydsl:querydsl-jpa'
 	runtimeOnly 'com.h2database:h2'	//DB TEST 용도
+
+	//Query DSL
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 
 	/* MySQL */
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	/* Security */
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
-
-
-
 
 
 }
@@ -62,3 +68,25 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+//querydsl 추가
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
+}
+
