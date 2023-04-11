@@ -1,3 +1,4 @@
 USE shop;
 SHOW TABLES;
 DROP TABLE item;
+SELECT * FROM item;

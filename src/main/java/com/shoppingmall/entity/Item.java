@@ -41,6 +41,10 @@ public class Item {
 
     private LocalDateTime updateTime;  //수정 시간
 
+    /*
+     Q클래스 활용 시 lombok의 어노테이션을 활용한 getter, setter 메소드는
+     컴파일 되지 않으므로 직접 메소드 생성 필요
+     */
     public Long getId() {
         return id;
     }

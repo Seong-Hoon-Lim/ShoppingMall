@@ -3,6 +3,7 @@ package com.shoppingmall.repository;
 import com.shoppingmall.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -16,8 +17,14 @@ import java.util.List;
  * count() : 엔티티 총 갯수 반환
  * Iterable<T> findAll() : 모든 엔티티 조회
  *
+ * QuerydslPredicateExecutor 인터페이스
+ * Predicate를 인자로 받는 메서드를 정의하면, Querydsl을 이용하여 동적으로
+ * 쿼리를 생성하여 실행.
+ * 복잡한 검색 조건을 쉽게 처리할 수 있으며, 코드의 가독성과 유지보수성을 높임.
+ *
  */
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long>,
+        QuerydslPredicateExecutor<Item> {
 
     /**
       상품 이름을 이용하여 데이터를 조회하는 기능
