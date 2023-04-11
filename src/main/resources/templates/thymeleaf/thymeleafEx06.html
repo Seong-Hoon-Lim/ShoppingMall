@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>thymeleaf example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <h2>파라미터 전달 예제</h2>
+  <div th:text="${param1}"></div>
+  <div th:text="${param2}"></div>
+  <h3>Thymeleaf 링크처리 예제 페이지</h3>
+  <div>
+    <a class="btn btn-primary" th:href="@{/thymeleaf/ex01}">예제1 페이지 이동</a>
+  </div>
+  <div>
+    <a class="btn btn-secondary" th:href="@{https://www.thymeleaf.org/}" target="_blank">thymeleaf 공식 페이지 이동</a>
+  </div>
+  <div>
+    <a class="btn btn-primary" th:href="@{/thymeleaf/ex06(param1 = '파라미터 데이터1',
+                                                          param2 = '파라미터 데이터2')}">thymeleaf 파라미터 전달</a>
+  </div>
+</body>
+</html>
