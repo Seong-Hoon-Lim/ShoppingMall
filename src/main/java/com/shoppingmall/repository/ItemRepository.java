@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ import java.util.List;
  * 복잡한 검색 조건을 쉽게 처리할 수 있으며, 코드의 가독성과 유지보수성을 높임.
  *
  */
+@Repository
 public interface ItemRepository extends JpaRepository<Item, Long>,
         QuerydslPredicateExecutor<Item> {
 
