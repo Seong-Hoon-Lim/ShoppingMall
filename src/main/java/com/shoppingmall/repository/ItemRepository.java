@@ -1,13 +1,13 @@
 package com.shoppingmall.repository;
 
-import com.shoppingmall.entity.Item;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+        import com.shoppingmall.entity.Item;
+        import org.springframework.data.jpa.repository.JpaRepository;
+        import org.springframework.data.jpa.repository.Query;
+        import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+        import org.springframework.data.repository.query.Param;
+        import org.springframework.stereotype.Repository;
 
-import java.util.List;
+        import java.util.List;
 
 /**
  * JpaRepository 를 상속 받아 기본적인 CRUD 및 페이징 처리 관련

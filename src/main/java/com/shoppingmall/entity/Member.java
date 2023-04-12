@@ -16,6 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "member")
 @Setter
+@Getter
 @ToString
 public class Member {
 
