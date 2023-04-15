@@ -36,7 +36,7 @@ class MemberServiceTest {
         memberDTO.setEmail("spring@gmail.com");
         memberDTO.setName("가길동");
         memberDTO.setAddr("경기도 평택시 청북읍 판교길 9");
-        memberDTO.setPasswd("1111");
+        memberDTO.setPasswd("11111111");
         return Member.createMember(memberDTO, encoder);
     }
 
