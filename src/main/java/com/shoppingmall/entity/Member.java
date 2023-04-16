@@ -41,10 +41,32 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /**
+    /*
      * Member entity를 생성하는 메소드
      * 별도로 엔티티를 생성해서 관리를 하면
      * 코드가 변경되더라도 한 군데만 수정하면 되는 이점이 있음.
+     */
+//    public static Member createMember(MemberDTO memberDTO,
+//                                      PasswordEncoder encoder) {
+//        Member member = new Member();
+//        member.setName(memberDTO.getName());
+//        member.setEmail(memberDTO.getEmail());
+//        member.setAddr(memberDTO.getAddr());
+//        /*
+//         스프링 시큐리티 설정 클래스에 등록한 BCryptPasswordEncoder Bean을
+//         파라미터로 넘겨서 비밀번호를 암호화 처리
+//         */
+//        String password = encoder.encode(memberDTO.getPassword());
+//        member.setPassword(password);
+//        member.setRole(Role.USER);
+//        return member;
+//    }
+
+    /*
+     * Member entity를 생성하는 메소드
+     * 별도로 엔티티를 생성해서 관리를 하면
+     * 코드가 변경되더라도 한 군데만 수정하면 되는 이점이 있음.
+     * ADMIN 계정으로 생성
      */
     public static Member createMember(MemberDTO memberDTO,
                                       PasswordEncoder encoder) {
@@ -56,9 +78,9 @@ public class Member {
          스프링 시큐리티 설정 클래스에 등록한 BCryptPasswordEncoder Bean을
          파라미터로 넘겨서 비밀번호를 암호화 처리
          */
-        String passwd = encoder.encode(memberDTO.getPassword());
-        member.setPassword(passwd);
-        member.setRole(Role.USER);
+        String password = encoder.encode(memberDTO.getPassword());
+        member.setPassword(password);
+        member.setRole(Role.ADMIN);
         return member;
     }
 

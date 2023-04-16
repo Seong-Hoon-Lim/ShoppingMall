@@ -10,6 +10,7 @@ body {
     min-height: 100%;
 }
 
+
 .content {
     margin-bottom: 100px;
     margin-top: 50px;
@@ -21,21 +22,6 @@ nav {
     position: relative;
     display: flex;
 }
-
-/*nav > .navbar-brand {*/
-/*    position: relative;*/
-/*    left: 200px;*/
-/*}*/
-
-/*.navbar-nav:first-child {*/
-/*    position: relative;*/
-/*    left: 300px;*/
-/*}*/
-
-/*.navbar-nav:last-child {*/
-/*    position: relative;*/
-/*    right: 300px;*/
-/*}*/
 
 .navbar-collapse {
     justify-content: center;
