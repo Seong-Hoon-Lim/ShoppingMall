@@ -10,18 +10,6 @@ body {
     min-height: 100%;
 }
 
-.footer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    padding: 15px 0;
-    text-align: center;
-    background: #000;
-    color: #fff;
-}
-
 .content {
     margin-bottom: 100px;
     margin-top: 50px;
@@ -29,7 +17,14 @@ body {
     margin-right: 200px;
 }
 
+nav > .navbar-brand {
+    position: relative;
+    left: 200px;
+}
+
 .navbar-nav {
+    right: 200px;
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -42,3 +37,16 @@ body {
     display: flex;
     align-items: center;
 }
+
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+
