@@ -2,6 +2,7 @@ package com.shoppingmall.service;
 
 import com.shoppingmall.dto.MemberDTO;
 import com.shoppingmall.entity.Member;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ class MemberServiceTest {
         memberDTO.setEmail("spring@gmail.com");
         memberDTO.setName("가길동");
         memberDTO.setAddr("경기도 평택시 청북읍 판교길 9");
-        memberDTO.setPassword("11111111");
+        memberDTO.setPasswd("11111111");
         return Member.createMember(memberDTO, encoder);
     }
 
@@ -53,7 +54,7 @@ class MemberServiceTest {
         assertEquals(member.getEmail(), savedMember.getEmail());
         assertEquals(member.getName(), savedMember.getName());
         assertEquals(member.getAddr(), savedMember.getAddr());
-        assertEquals(member.getPassword(), savedMember.getPassword());
+        assertEquals(member.getPasswd(), savedMember.getPasswd());
         assertEquals(member.getRole(), savedMember.getRole());
     }
 

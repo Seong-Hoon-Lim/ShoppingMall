@@ -10,34 +10,6 @@ body {
     min-height: 100%;
 }
 
-.content {
-    margin-bottom: 100px;
-    margin-top: 50px;
-    margin-left: 200px;
-    margin-right: 200px;
-}
-
-nav > .navbar-brand {
-    position: relative;
-    left: 200px;
-}
-
-.navbar-nav {
-    right: 200px;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-collapse {
-    justify-content: center;
-}
-
-.form-inline {
-    display: flex;
-    align-items: center;
-}
-
 .footer {
     position: absolute;
     left: 0;
@@ -50,3 +22,23 @@ nav > .navbar-brand {
     color: #fff;
 }
 
+.content {
+    margin-bottom: 100px;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-collapse {
+    justify-content: center;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+}

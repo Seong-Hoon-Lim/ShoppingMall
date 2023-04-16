@@ -33,7 +33,7 @@ public class Member {
     private String email;
 
     @Column
-    private String password;
+    private String passwd;
 
     @Column
     private String addr;
@@ -56,8 +56,8 @@ public class Member {
          스프링 시큐리티 설정 클래스에 등록한 BCryptPasswordEncoder Bean을
          파라미터로 넘겨서 비밀번호를 암호화 처리
          */
-        String passwd = encoder.encode(memberDTO.getPassword());
-        member.setPassword(passwd);
+        String passwd = encoder.encode(memberDTO.getPasswd());
+        member.setPasswd(passwd);
         member.setRole(Role.USER);
         return member;
     }
