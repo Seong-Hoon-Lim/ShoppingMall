@@ -45,9 +45,9 @@
         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
       </div>
       <div class="form-group">
-        <label th:for="passwd">비밀번호</label>
-        <input type="password" th:field="*{passwd}" class="form-control" placeholder="비밀번호 입력">
-        <p th:if="${#fields.hasErrors('passwd')}" th:errors="*{passwd}" class="fieldError">Incorrect data</p>
+        <label th:for="password">비밀번호</label>
+        <input type="password" th:field="*{getPassword}" class="form-control" placeholder="비밀번호 입력">
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{getPassword}" class="fieldError">Incorrect data</p>
       </div>
       <div class="form-group">
         <label th:for="addr">주소</label>

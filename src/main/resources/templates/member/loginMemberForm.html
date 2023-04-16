@@ -24,8 +24,8 @@
                 <input type="email" name="email" class="form-control" placeholder="이메일을 입력해주세요">
             </div>
             <div class="form-group">
-                <label th:for="passwd">비밀번호</label>
-                <input type="password" name="passwd" id="passwd" class="form-control" placeholder="비밀번호 입력">
+                <label th:for="password">비밀번호</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호 입력">
             </div>
             <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
             <button class="btn btn-primary">로그인</button>
