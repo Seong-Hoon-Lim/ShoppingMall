@@ -5,4 +5,4 @@ DROP TABLE item;
 SELECT * FROM item;
 
 DROP TABLE member;
-SELECT * FROM member;
+SELECT * FROM `member`;

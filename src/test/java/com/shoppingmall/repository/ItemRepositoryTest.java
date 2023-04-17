@@ -20,8 +20,6 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 class ItemRepositoryTest {
@@ -39,7 +37,7 @@ class ItemRepositoryTest {
         item.setName("상품1");
         item.setPrice(20000);
         item.setDescription("상품1 상세 설명");
-        item.setStatus(ItemSellStatus.SELL);
+        item.setItemStatus(ItemSellStatus.SELL);
         item.setStock(100);
         item.setCreateTime(LocalDateTime.now());
         item.setUpdateTime(LocalDateTime.now());
@@ -55,7 +53,7 @@ class ItemRepositoryTest {
             item.setName("상품" + i);
             item.setPrice(20000 + i);
             item.setDescription("상품" + i + " 상세 설명");
-            item.setStatus(ItemSellStatus.SELL);
+            item.setItemStatus(ItemSellStatus.SELL);
             item.setStock(100);
             item.setCreateTime(LocalDateTime.now());
             item.setUpdateTime(LocalDateTime.now());
@@ -153,7 +151,7 @@ class ItemRepositoryTest {
             item.setName("테스트상품" + i);
             item.setPrice(20000 + i);
             item.setDescription("테스트상품 상세설명" + i);
-            item.setStatus(ItemSellStatus.SELL);
+            item.setItemStatus(ItemSellStatus.SELL);
             item.setStock(100);
             item.setCreateTime(LocalDateTime.now());
             item.setUpdateTime(LocalDateTime.now());
@@ -165,7 +163,7 @@ class ItemRepositoryTest {
             item.setName("테스트상품" + i);
             item.setPrice(20000 + i);
             item.setDescription("테스트상품 상세설명" + i);
-            item.setStatus(ItemSellStatus.SOLD_OUT);
+            item.setItemStatus(ItemSellStatus.SOLD_OUT);
             item.setStock(0);
             item.setCreateTime(LocalDateTime.now());
             item.setUpdateTime(LocalDateTime.now());

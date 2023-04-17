@@ -1,8 +1,6 @@
 package com.shoppingmall.entity;
 
 import com.shoppingmall.constant.ItemSellStatus;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -35,11 +33,25 @@ public class Item {
 
     @Enumerated(EnumType.STRING)//String 타입의 enum 타입을 매핑
     @Column(name = "item_status")
-    private ItemSellStatus status; //상품 판매 상태
+    private ItemSellStatus itemStatus; //상품 판매 상태
 
     private LocalDateTime createTime;   //등록 시간
 
     private LocalDateTime updateTime;  //수정 시간
+
+    /**
+     * 다대다 매핑은 연결 테이블을 통해 일대다, 다대일 관계로 풀어냄
+     * 현 프로젝트에서는 다대다 매핑을 사용하지 않음
+     * 다대다 매핑의 예시 코드
+     *
+     * @ManyToMany
+     * @JoinTable(
+     *        name = "member_item"
+     *        joinColumns = @JoinColumn(name = "member_id"),
+     *        inverseJoinColumns = @JoinColumn(name = "item_id")
+     *    )
+     *    private List<Member> member;
+     */
 
     /*
      Q클래스 활용 시 lombok의 어노테이션을 활용한 getter, setter 메소드는
@@ -85,12 +97,12 @@ public class Item {
         this.description = description;
     }
 
-    public ItemSellStatus getStatus() {
-        return status;
+    public ItemSellStatus getItemStatus() {
+        return itemStatus;
     }
 
-    public void setStatus(ItemSellStatus status) {
-        this.status = status;
+    public void setItemStatus(ItemSellStatus status) {
+        this.itemStatus = status;
     }
 
     public LocalDateTime getCreateTime() {
