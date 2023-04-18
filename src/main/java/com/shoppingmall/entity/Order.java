@@ -39,8 +39,14 @@ public class Order {
      연관관계의 주인을 설정. @OneToMany(mappedBy = "order") 의미는 OrderItem 에 있는
      Order 에 의해 관리됨을 의미
      연관관계의 주인의 필드를 mappedBy 값으로 세팅하면 됨
+     
+     부모 엔티티의 영속성 상태 변화를 자식 엔티티에 모두 전이하는 CascadeTypeAll 옵션을 설정
+     고객이 주문할 상품을 선택하고 주문할 때 주문 엔티티를 저장하면서 주문 상품 엔티티도 함께 저장되는 경우
+     
+     orphanRemoval = true: 고아 객체 제거 옵션
      */
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,
+                orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>(); //여러개 주문 상품을 갖게 되므로 리스트 저장
 
     private LocalDateTime createTime;

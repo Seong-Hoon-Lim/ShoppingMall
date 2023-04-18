@@ -53,7 +53,7 @@ public class ThymeleafExController {
         return "thymeleaf/thymeleafEx03";
     }
 
-    /* 타임리프 반복문 th:if, th:unless 문법 예제 */
+    /* 타임리프 조건문 th:if, th:unless 문법 예제 */
     @GetMapping(value = "/ex04")
     public String thymeleafEx04(Model model) {
 
