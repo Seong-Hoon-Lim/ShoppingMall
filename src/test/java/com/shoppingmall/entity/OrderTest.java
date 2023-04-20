@@ -3,6 +3,7 @@ package com.shoppingmall.entity;
 import com.shoppingmall.constant.ItemSellStatus;
 import com.shoppingmall.repository.ItemRepository;
 import com.shoppingmall.repository.MemberRepository;
+import com.shoppingmall.repository.OrderItemRepository;
 import com.shoppingmall.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,9 @@ class OrderTest {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
     @PersistenceContext
     EntityManager em;
@@ -112,6 +116,29 @@ class OrderTest {
         //order 엔티티에서 관리하고 있는 orderItem 리스트의 0번째 인덱스 요소 제거
         order.getOrderItems().remove(0);
         em.flush();
+    }
+
+    @Test
+    @DisplayName("지연 로딩 테스트")
+    public void lazyLoadingTest() {
+
+        //기존에 만들었던 주문 생성 메소드를 이용 주문 데이터 저장
+        Order order = this.createOrder();
+        Long orderItemId = order.getOrderItems().get(0).getId();
+        em.flush();
+        em.clear();
+
+        /*
+          영속성 컨텍스트의 상태 초기화 후 order 엔티티에 저장했던
+          주문 상품 아이디를 이용 orderItem을 DB에서 조회
+         */
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+                .orElseThrow(EntityNotFoundException::new);
+        /*
+         orderItem 엔티티에 있는 order 객체의 클래스를 출력
+         Order 클래스가 출력됨이 확인됨.
+         */
+        System.out.println("Order class : " + orderItem.getOrder().getClass());
     }
 
 
