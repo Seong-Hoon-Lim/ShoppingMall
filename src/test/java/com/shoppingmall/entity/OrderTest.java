@@ -139,8 +139,9 @@ class OrderTest {
          Order 클래스가 출력됨이 확인됨.
          */
         System.out.println("Order class : " + orderItem.getOrder().getClass());
+        System.out.println("===========================================");
+        orderItem.getOrder().getOrderDate();
+        System.out.println("============================================");
     }
-
-
 
 }

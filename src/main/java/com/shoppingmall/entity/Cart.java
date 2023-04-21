@@ -31,7 +31,7 @@ public class Cart {
      @JoinColumn: 매핑할 외래키를 지정
                   name 속성에는 매핑할 외래키의 이름을 설정
      */
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;  //한명의 회원은 여러번 주문을 할 수 있으므로 주문 엔티티 기준에서 다대일 단방향 매핑
     
@@ -46,7 +46,7 @@ public class Order {
      orphanRemoval = true: 고아 객체 제거 옵션
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,
-                orphanRemoval = true)
+                orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>(); //여러개 주문 상품을 갖게 되므로 리스트 저장
 
     private LocalDateTime createTime;
