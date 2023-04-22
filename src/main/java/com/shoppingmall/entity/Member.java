@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @ToString
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @Column(name = "member_id")

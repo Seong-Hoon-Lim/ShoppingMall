@@ -27,7 +27,7 @@ public class ThymeleafExController {
         item.setDescription("test 셔츠입니다");
         item.setName("test 셔츠");
         item.setPrice(20000);
-        item.setCreateTime(LocalDateTime.now());
+//        item.setCreateTime(LocalDateTime.now());
 
         model.addAttribute("item", item);
         return "thymeleaf/thymeleafEx02";
@@ -45,7 +45,7 @@ public class ThymeleafExController {
             item.setDescription("test 셔츠 " + i + "입니다.");
             item.setName("test 셔츠" + i);
             item.setPrice(20000 + i);
-            item.setCreateTime(LocalDateTime.now());
+//            item.setCreateTime(LocalDateTime.now());
 
             itemList.add(item);
         }
@@ -64,7 +64,7 @@ public class ThymeleafExController {
             item.setDescription("test 신발" + i + "입니다.");
             item.setName("test 신발" + i);
             item.setPrice(40000 + i);
-            item.setCreateTime(LocalDateTime.now());
+//            item.setCreateTime(LocalDateTime.now());
 
             itemList.add(item);
         }
@@ -83,7 +83,7 @@ public class ThymeleafExController {
             item.setDescription("test 신발" + i + "입니다.");
             item.setName("test 신발" + i);
             item.setPrice(40000 + i);
-            item.setCreateTime(LocalDateTime.now());
+//            item.setCreateTime(LocalDateTime.now());
 
             itemList.add(item);
         }

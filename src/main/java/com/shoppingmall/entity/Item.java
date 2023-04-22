@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 //@Getter
 //@Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @Column(name = "item_id")
@@ -35,9 +35,8 @@ public class Item {
     @Column(name = "item_status")
     private ItemSellStatus itemStatus; //상품 판매 상태
 
-    private LocalDateTime createTime;   //등록 시간
-
-    private LocalDateTime updateTime;  //수정 시간
+//    private LocalDateTime createTime;   //등록 시간
+//    private LocalDateTime updateTime;  //수정 시간
 
     /**
      * 다대다 매핑은 연결 테이블을 통해 일대다, 다대일 관계로 풀어냄
@@ -105,19 +104,19 @@ public class Item {
         this.itemStatus = status;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
+//    public LocalDateTime getCreateTime() {
+//        return createTime;
+//    }
+//
+//    public void setCreateTime(LocalDateTime createTime) {
+//        this.createTime = createTime;
+//    }
+//
+//    public LocalDateTime getUpdateTime() {
+//        return updateTime;
+//    }
+//
+//    public void setUpdateTime(LocalDateTime updateTime) {
+//        this.updateTime = updateTime;
+//    }
 }

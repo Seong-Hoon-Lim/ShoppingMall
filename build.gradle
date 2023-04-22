@@ -62,6 +62,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'junit:junit:4.12'
 
+	//ModelMapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
 
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
