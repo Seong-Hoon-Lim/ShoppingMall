@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class ItemDTO {
     private ItemSellStatus itemStatus;
 
     //상품 저장 후 수정할 때 상품 이미지 정보를 저장하는 리스트
-    private List<ItemImgDTO> itemList = new ArrayList<>();
+    private List<ItemImgDTO> itemImgList = new ArrayList<>();
 
     /*
      상품의 이미지 아이디를 저장하는 리스트

@@ -23,10 +23,10 @@ public class MemberController {
     private final PasswordEncoder encoder;
 
     /* 회원가입 페이지 */
-    @GetMapping(value = "addMember")
-    public String saveMemberForm(Model model) {
+    @GetMapping(value = "register")
+    public String registerMemberPage(Model model) {
         model.addAttribute("memberDTO", new MemberDTO());
-        return "member/addMemberForm";
+        return "member/registerMember";
     }
 
     /*
@@ -38,12 +38,12 @@ public class MemberController {
       
       회원가입 시 중복 회원 가입 예외가 발생하면 에러 메시지를 뷰로 전달
      */
-    @PostMapping(value = "addMember")
-    public String saveMemberProcess(@Valid MemberDTO memberDTO,
-                                    BindingResult bindingResult, Model model) {
+    @PostMapping(value = "register")
+    public String registerMemberProcess(@Valid MemberDTO memberDTO,
+                                        BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "/member/addMemberForm";
+            return "member/registerMember";
         }
         try {
             Member member = Member.createMember(memberDTO, encoder);
@@ -51,7 +51,7 @@ public class MemberController {
         }
         catch (IllegalStateException e) {
             model.addAttribute("errorMsg", e.getMessage());
-            return "/member/addMemberForm";
+            return "member/registerMember";
         }
         return "redirect:/";
 
@@ -60,14 +60,14 @@ public class MemberController {
     /* 로그인 페이지 */
     @GetMapping(value = "login")
     public String loginPage() {
-        return "/member/loginMemberForm";
+        return "member/loginMember";
     }
 
     /* 로그인 에러 처리 (GET 방식)*/
     @GetMapping(value = "login/error")
     public String loginErrorMsg(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-        return "/member/loginMemberForm";
+        return "member/loginMember";
     }
 
     @PostMapping(value = "login")
