@@ -46,8 +46,8 @@ class OrderTest {
         item.setDescription("테스트 셔츠입니다");
         item.setItemStatus(ItemSellStatus.SELL);
         item.setStock(100);
-        item.setCreateTime(LocalDateTime.now());
-        item.setUpdateTime(LocalDateTime.now());
+        item.setRegisteredTime(LocalDateTime.now());
+        item.setUpdatedTime(LocalDateTime.now());
         return item;
     }
 

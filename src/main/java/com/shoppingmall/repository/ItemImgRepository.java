@@ -14,6 +14,6 @@ public interface ItemImgRepository extends JpaRepository<ItemImg, Long> {
      상품 이미지 아이디의 오름차순으로 DB를 조회하는 쿼리 메소드로
      상품 아이디를 매개변수로 가짐
      */
-    List<ItemImg> findItemImgsByItemIdOrderByIdAsc(Long itemId);
+    List<ItemImg> findItemImgByItemIdOrderByIdAsc(Long itemId);
 
 }

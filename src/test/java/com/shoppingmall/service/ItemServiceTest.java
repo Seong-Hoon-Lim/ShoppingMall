@@ -66,7 +66,7 @@ class ItemServiceTest {
         Long itemId = itemService.saveItem(itemDTO, multipartFileList);
 
         List<ItemImg> itemImgs =
-                itemImgRepository.findItemImgsByItemIdOrderByIdAsc(itemId);
+                itemImgRepository.findItemImgByItemIdOrderByIdAsc(itemId);
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(EntityNotFoundException::new);
 

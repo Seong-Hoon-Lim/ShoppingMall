@@ -26,10 +26,10 @@ public abstract class BaseTimeEntity {
     //엔티티가 생성되어 저장될 때 시간을 자동으로 저장
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createTime;
+    private LocalDateTime registeredTime;
     
     //엔티티의 값을 변경할 때 시간을 자동으로 저장
     @LastModifiedDate
-    private LocalDateTime updateTime;
+    private LocalDateTime updatedTime;
     
 }

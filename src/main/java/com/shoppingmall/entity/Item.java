@@ -1,10 +1,10 @@
 package com.shoppingmall.entity;
 
 import com.shoppingmall.constant.ItemSellStatus;
+import com.shoppingmall.dto.ItemDTO;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "item")
@@ -104,19 +104,15 @@ public class Item extends BaseEntity {
         this.itemStatus = status;
     }
 
-//    public LocalDateTime getCreateTime() {
-//        return createTime;
-//    }
-//
-//    public void setCreateTime(LocalDateTime createTime) {
-//        this.createTime = createTime;
-//    }
-//
-//    public LocalDateTime getUpdateTime() {
-//        return updateTime;
-//    }
-//
-//    public void setUpdateTime(LocalDateTime updateTime) {
-//        this.updateTime = updateTime;
-//    }
+    /*
+     상품을 업데이트 하는 로직
+     엔티티 클래스에 비즈니스 로직을 추가하면 코드 재활용에 용이
+     */
+    public void updateItem(ItemDTO itemDTO) {
+        this.name = itemDTO.getName();
+        this.price = itemDTO.getPrice();
+        this.stock = itemDTO.getStock();
+        this.description = itemDTO.getDescription();
+        this.itemStatus = itemDTO.getItemStatus();
+    }
 }

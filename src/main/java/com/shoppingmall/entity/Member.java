@@ -80,7 +80,7 @@ public class Member extends BaseEntity {
          */
         String password = encoder.encode(memberDTO.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
 

@@ -13,8 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -41,9 +39,9 @@ class MemberTest {
         Member member = repository.findById(newMember.getId())
                 .orElseThrow(EntityNotFoundException::new);
 
-        System.out.println("create time : " + member.getCreateTime());
-        System.out.println("update time : " + member.getUpdateTime());
-        System.out.println("create member : " + member.getCreatedWorker());
+        System.out.println("create time : " + member.getRegisteredTime());
+        System.out.println("update time : " + member.getUpdatedTime());
+        System.out.println("create member : " + member.getRegisteredWorker());
         System.out.println("update member : " + member.getUpdatedWorker());
     }
 

@@ -1,6 +1,7 @@
 package com.shoppingmall.service;
 
 import com.shoppingmall.dto.ItemDTO;
+import com.shoppingmall.dto.ItemImgDTO;
 import com.shoppingmall.entity.Item;
 import com.shoppingmall.entity.ItemImg;
 import com.shoppingmall.repository.ItemImgRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +53,53 @@ public class ItemService {
             imgService.saveItemImg(itemImg, imgFileList.get(i));
         }
         return item.getId();
+    }
+
+    /*
+     등록된 상품을 불러오는 메소드
+     @Transactional(readOnly = true): 상품 데이터를 읽어오는 트랜잭션을 읽기 전용으로 설정
+     이럴 경우 JPA가 더티체킹(변경감지)을 수행하지 않아 성능 향상 시킬 수 있음.
+     */
+    @Transactional(readOnly = true)
+    public ItemDTO findItemInfo(Long itemId) {
+
+        List<ItemImg> imgList =
+                //해당되는 상품의 이미지를 조회. 등록순으로 가지고 오기 위해 상품 이미지 아이디 오름차순 조회
+                imgRepository.findItemImgByItemIdOrderByIdAsc(itemId);
+        List<ItemImgDTO> imgDTOList = new ArrayList<>();
+        
+        //조회한 ItemImg 엔티티를 ItemImgDTO 객체로 만들어서 리스트에 추가
+        for (ItemImg itemImg : imgList) {
+            ItemImgDTO itemImgDTO = ItemImgDTO.of(itemImg);
+            imgDTOList.add(itemImgDTO);
+        }
+        
+        //상품의 아이디를 통해 상품 엔티티를 조회. 존재하지 않을 때는 EntityNotFoundException 발생
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(EntityNotFoundException::new);
+        ItemDTO itemDTO = ItemDTO.of(item);
+        itemDTO.setItemImgList(imgDTOList);
+        return itemDTO;
+    }
+
+    public Long updateItem(ItemDTO itemDTO,
+                           List<MultipartFile> imgFileList) throws Exception {
+
+        //상품 등록 화면에서 전달 받은 상품 아이디를 이용하여 상품 엔티티를 조회
+        Item item = itemRepository.findById(itemDTO.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        //상품 등록 화면에서 전달 받은 itemDTO 객체를 통해 상품 엔티티를 업데이트
+        item.updateItem(itemDTO);
+
+        //상품 이미지 아이디 리스트를 조회
+        List<Long> itemImgIds = itemDTO.getItemImgIds();
+
+        //상품 이미지를 업데이트하기 위해서 상품 이미지, 아이디와, 상품 이미지 파일 정보를 넘겨줌
+        for (int i = 0; i < imgFileList.size(); i++) {
+            imgService.updateItemImg(itemImgIds.get(i), imgFileList.get(i));
+        }
+        return item.getId();
+
     }
 
 

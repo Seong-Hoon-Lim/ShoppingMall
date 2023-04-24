@@ -39,8 +39,8 @@ class ItemRepositoryTest {
         item.setDescription("상품1 상세 설명");
         item.setItemStatus(ItemSellStatus.SELL);
         item.setStock(100);
-        item.setCreateTime(LocalDateTime.now());
-        item.setUpdateTime(LocalDateTime.now());
+        item.setRegisteredTime(LocalDateTime.now());
+        item.setUpdatedTime(LocalDateTime.now());
 
         Item savedItem = itemRepository.save(item);
     }
@@ -55,8 +55,8 @@ class ItemRepositoryTest {
             item.setDescription("상품" + i + " 상세 설명");
             item.setItemStatus(ItemSellStatus.SELL);
             item.setStock(100);
-            item.setCreateTime(LocalDateTime.now());
-            item.setUpdateTime(LocalDateTime.now());
+            item.setRegisteredTime(LocalDateTime.now());
+            item.setUpdatedTime(LocalDateTime.now());
 
             Item savedItem = itemRepository.save(item);
         }
@@ -153,8 +153,8 @@ class ItemRepositoryTest {
             item.setDescription("테스트상품 상세설명" + i);
             item.setItemStatus(ItemSellStatus.SELL);
             item.setStock(100);
-            item.setCreateTime(LocalDateTime.now());
-            item.setUpdateTime(LocalDateTime.now());
+            item.setRegisteredTime(LocalDateTime.now());
+            item.setUpdatedTime(LocalDateTime.now());
             itemRepository.save(item);
         }
 
@@ -165,8 +165,8 @@ class ItemRepositoryTest {
             item.setDescription("테스트상품 상세설명" + i);
             item.setItemStatus(ItemSellStatus.SOLD_OUT);
             item.setStock(0);
-            item.setCreateTime(LocalDateTime.now());
-            item.setUpdateTime(LocalDateTime.now());
+            item.setRegisteredTime(LocalDateTime.now());
+            item.setUpdatedTime(LocalDateTime.now());
             itemRepository.save(item);
         }
     }
