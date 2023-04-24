@@ -1,19 +1,68 @@
 package com.shoppingmall.controller;
 
 import com.shoppingmall.dto.ItemDTO;
+import com.shoppingmall.service.ItemService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class ItemController {
 
+    private final ItemService itemService;
+
     /* 상품 등록 페이지 */
-    @GetMapping(value = "/admin/item/addItem")
+    @GetMapping(value = "/admin/item/register")
     public String registerItemPage(Model model) {
         model.addAttribute("itemDTO", new ItemDTO());
         return "item/registerItem";
     }
+
+    @PostMapping(value = "/admin/item/register")
+    public String registerItemProcess(@Valid ItemDTO itemDTO,
+                                      BindingResult bindingResult,
+                                      Model model,
+                                      @RequestParam("itemImgFile")List<MultipartFile> imgFileList) {
+
+        //상품 등록 시 필수 값이 없다면 다시 상품 등록 페이지로 전환
+        if (bindingResult.hasErrors()) {
+            return "item/registerItem";
+        }
+
+        /*
+         상품 등록 시 첫번째 이미지가 없다면 에러 메시지와 함께 상품 등록 페이지로 전환
+         상품의 첫 이미지는 메인 페이지에서 보여줄 상품 이미지로 사용하기 위해 필수 값 지정.
+         */
+        else if (imgFileList.get(0).isEmpty() && itemDTO.getId() == null) {
+            model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값 입니다.");
+            return "item/registerItem";
+        }
+
+        /*
+         상품 저장의 서비스 로직을 호출. 매개변수로 상품 정보와 상품 이미지 정보를
+         담고 있는 itemFileList 를 넘겨줌
+         */
+        try {
+            itemService.saveItem(itemDTO, imgFileList);
+        }
+        catch (Exception e) {
+            model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
+            return "item/registerItem";
+        }
+        return "redirect:/";
+
+
+    }
+
 
 
 
