@@ -87,7 +87,7 @@
         <!-- 첫번째 페이지면 이전 페이지로 이동하는 <Previous> 버튼을 선택 불가능하도록 disabled 클래스 추가. -->
         <li class="page-item" th:classappend="${items.first}?'disabled'">
           <a th:onclick="'javascript:page(' + ${items.number - 1} + ')'" aria-label='Previous' class="page-link">
-            <span aria-hidden='true'>Previous</span>
+            <span aria-hidden='true'>이전</span>
           </a>
         </li>
 
@@ -104,7 +104,7 @@
         <li class="page-item" th:classappend="${items.last}?'disabled'">
           <!-- <Next> 버튼 클릭시 현재 페이지에서 다음 페이지로 이동하도록 page 함수를 호출. -->
           <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'" aria-label='Next' class="page-link">
-            <span aria-hidden='true'>Next</span>
+            <span aria-hidden='true'>다음</span>
           </a>
         </li>
 
