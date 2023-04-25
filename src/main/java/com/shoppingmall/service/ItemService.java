@@ -106,7 +106,11 @@ public class ItemService {
 
     }
 
-    /* 상품 관리 페이지 목록을 불러오는 메소드 */
+    /*
+     상품 관리 페이지 목록을 불러오는 메소드 상품 조회 조건 ItemSearchDTO 과 페이지 정보를
+     파라미터로 받아서 상품 데이터를 조회하는 메소드 getAdminItemPage() 를 추가.
+     데이터 수정이 일어나지 않으므로 @Transactional(readOnly = true) 최적화 위해 설정.
+     */
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO,
                                        Pageable pageable) {
