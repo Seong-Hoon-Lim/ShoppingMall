@@ -1,8 +1,13 @@
 package com.shoppingmall.controller;
 
 import com.shoppingmall.dto.ItemDTO;
+import com.shoppingmall.dto.ItemSearchDTO;
+import com.shoppingmall.entity.Item;
 import com.shoppingmall.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -117,6 +123,23 @@ public class ItemController {
         return "redirect:/";
 
     }
+
+    @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
+    public String itemManagePage(ItemSearchDTO searchDTO,
+                                 @PathVariable("page")Optional<Integer> page, Model model) {
+
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        Page<Item> items =
+                itemService.getAdminItemPage(searchDTO, pageable);
+        model.addAttribute("items", items);
+        model.addAttribute("searchDTO", searchDTO);
+        model.addAttribute("maxPage", 5);
+
+        return "item/manageItem";
+
+    }
+
+
 
 
 }

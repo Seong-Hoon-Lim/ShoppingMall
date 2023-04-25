@@ -20,9 +20,9 @@ public abstract class BaseEntity extends BaseTimeEntity {
 
     @CreatedBy
     @Column(updatable = false)
-    private String registeredWorker;
+    private String registeredBy;
 
     @LastModifiedBy
-    private String updatedWorker;
+    private String updatedBy;
 
 }

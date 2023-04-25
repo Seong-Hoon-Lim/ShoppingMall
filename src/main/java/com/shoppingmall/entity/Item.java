@@ -19,7 +19,7 @@ public class Item extends BaseEntity {
     private Long id;    //상품코드
 
     @Column(name = "item_name", nullable = false, length = 50)  // VARCHAR(50) NOT NULL
-    private String name;   //상품명
+    private String itemName;   //상품명
 
     @Column(nullable = false)
     private int price;  //가격
@@ -64,12 +64,12 @@ public class Item extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemName(String name) {
+        this.itemName = name;
     }
 
     public int getPrice() {
@@ -109,7 +109,7 @@ public class Item extends BaseEntity {
      엔티티 클래스에 비즈니스 로직을 추가하면 코드 재활용에 용이
      */
     public void updateItem(ItemDTO itemDTO) {
-        this.name = itemDTO.getName();
+        this.itemName = itemDTO.getItemName();
         this.price = itemDTO.getPrice();
         this.stock = itemDTO.getStock();
         this.description = itemDTO.getDescription();

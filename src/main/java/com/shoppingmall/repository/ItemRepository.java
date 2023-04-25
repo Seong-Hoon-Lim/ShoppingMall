@@ -23,24 +23,27 @@ package com.shoppingmall.repository;
  * 쿼리를 생성하여 실행.
  * 복잡한 검색 조건을 쉽게 처리할 수 있으며, 코드의 가독성과 유지보수성을 높임.
  *
+ * ItemRepositoryCustom 인터페이스를 상속하면서 Querydsl로 구현한
+ * 상품 관리 페이지 목록을 불러오는 메소드 사용
+ *
  */
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long>,
-        QuerydslPredicateExecutor<Item> {
+        QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
 
     /**
       상품 이름을 이용하여 데이터를 조회하는 기능
       쿼리 메소드 사용 시 반드시 정해진 규칙 준수!
       find + entity클래스명 + By + 조회할 필드명
      */
-    List<Item> findItemByName(String name);
+    List<Item> findItemByItemName(String itemName);
 
     /**
      * 상품명과 상품 상세 설명을 OR 조건을 이용하여
      * 조회하는 쿼리 메소드
      * find + entity클래스명 + By + 조회할 필드명 + Or + 조회할 필드명
      */
-    List<Item> findItemByNameOrDescription(String name, String description);
+    List<Item> findItemByItemNameOrDescription(String itemName, String description);
 
     /**
      * 파라미터로 넘어온 price 변수보다 값이 작은 데이터를

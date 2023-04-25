@@ -2,11 +2,14 @@ package com.shoppingmall.service;
 
 import com.shoppingmall.dto.ItemDTO;
 import com.shoppingmall.dto.ItemImgDTO;
+import com.shoppingmall.dto.ItemSearchDTO;
 import com.shoppingmall.entity.Item;
 import com.shoppingmall.entity.ItemImg;
 import com.shoppingmall.repository.ItemImgRepository;
 import com.shoppingmall.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,6 +85,7 @@ public class ItemService {
         return itemDTO;
     }
 
+    /* 상품 수정 메소드 */
     public Long updateItem(ItemDTO itemDTO,
                            List<MultipartFile> imgFileList) throws Exception {
 
@@ -100,6 +104,13 @@ public class ItemService {
         }
         return item.getId();
 
+    }
+
+    /* 상품 관리 페이지 목록을 불러오는 메소드 */
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO,
+                                       Pageable pageable) {
+        return itemRepository.getAdminItemPage(itemSearchDTO, pageable);
     }
 
 

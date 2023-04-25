@@ -34,7 +34,7 @@ class ItemRepositoryTest {
     @DisplayName("상품 저장 테스트")
     public void saveItemTest() {
         Item item = new Item();
-        item.setName("상품1");
+        item.setItemName("상품1");
         item.setPrice(20000);
         item.setDescription("상품1 상세 설명");
         item.setItemStatus(ItemSellStatus.SELL);
@@ -50,7 +50,7 @@ class ItemRepositoryTest {
     public void saveItemListTest() {
         for (int i = 1; i <= 10; i++) {
             Item item = new Item();
-            item.setName("상품" + i);
+            item.setItemName("상품" + i);
             item.setPrice(20000 + i);
             item.setDescription("상품" + i + " 상세 설명");
             item.setItemStatus(ItemSellStatus.SELL);
@@ -66,7 +66,7 @@ class ItemRepositoryTest {
     @DisplayName("상품명 조회 테스트")
     public void findItemByNameTest() {
         this.saveItemListTest();
-        List<Item> itemList = itemRepository.findItemByName("상품1");
+        List<Item> itemList = itemRepository.findItemByItemName("상품1");
         for (Item item : itemList) {
             System.out.println(item.toString());
         }
@@ -77,7 +77,7 @@ class ItemRepositoryTest {
     public void findItemByNameOrDescriptionTest() {
         this.saveItemListTest();
         List<Item> itemList =
-                itemRepository.findItemByNameOrDescription("상품2", "상품5 상세 설명");
+                itemRepository.findItemByItemNameOrDescription("상품2", "상품5 상세 설명");
         for (Item item : itemList) {
             System.out.println(item.toString());
         }
@@ -133,7 +133,7 @@ class ItemRepositoryTest {
          Java 코드로 SQL문 처럼 작성
          */
         JPAQuery<Item> query = queryFactory.selectFrom(qItem)
-                .where(qItem.status.eq(ItemSellStatus.SELL))
+                .where(qItem.itemStatus.eq(ItemSellStatus.SELL))
                 .where(qItem.description.like("%" + "상품 상세 설명" + "%"))
                 .orderBy(qItem.price.desc());
 
@@ -148,7 +148,7 @@ class ItemRepositoryTest {
     public void saveItemList() {
         for (int i = 1; i <= 5; i++) {
             Item item = new Item();
-            item.setName("테스트상품" + i);
+            item.setItemName("테스트상품" + i);
             item.setPrice(20000 + i);
             item.setDescription("테스트상품 상세설명" + i);
             item.setItemStatus(ItemSellStatus.SELL);
@@ -160,7 +160,7 @@ class ItemRepositoryTest {
 
         for (int i = 1; i <= 10; i++) {
             Item item = new Item();
-            item.setName("테스트상품" + i);
+            item.setItemName("테스트상품" + i);
             item.setPrice(20000 + i);
             item.setDescription("테스트상품 상세설명" + i);
             item.setItemStatus(ItemSellStatus.SOLD_OUT);
@@ -186,7 +186,7 @@ class ItemRepositoryTest {
         booleanBuilder.and(item.price.gt(price));
 
         if (StringUtils.equals(status, ItemSellStatus.SELL)) {
-            booleanBuilder.and(item.status.eq(ItemSellStatus.SELL));
+            booleanBuilder.and(item.itemStatus.eq(ItemSellStatus.SELL));
         }
 
         Pageable pageable = (Pageable) PageRequest.of(0, 5);

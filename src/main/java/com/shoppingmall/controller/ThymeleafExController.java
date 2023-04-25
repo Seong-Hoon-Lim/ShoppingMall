@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class ThymeleafExController {
     public String thymeleafEx02(Model model) {
         ItemDTO item = new ItemDTO();
         item.setDescription("test 셔츠입니다");
-        item.setName("test 셔츠");
+        item.setItemName("test 셔츠");
         item.setPrice(20000);
 //        item.setCreateTime(LocalDateTime.now());
 
@@ -43,7 +42,7 @@ public class ThymeleafExController {
         for (int i = 1; i <= 10; i++) {
             ItemDTO item = new ItemDTO();
             item.setDescription("test 셔츠 " + i + "입니다.");
-            item.setName("test 셔츠" + i);
+            item.setItemName("test 셔츠" + i);
             item.setPrice(20000 + i);
 //            item.setCreateTime(LocalDateTime.now());
 
@@ -62,7 +61,7 @@ public class ThymeleafExController {
         for (int i = 0; i <= 10; i++) {
             ItemDTO item = new ItemDTO();
             item.setDescription("test 신발" + i + "입니다.");
-            item.setName("test 신발" + i);
+            item.setItemName("test 신발" + i);
             item.setPrice(40000 + i);
 //            item.setCreateTime(LocalDateTime.now());
 
@@ -81,7 +80,7 @@ public class ThymeleafExController {
         for (int i = 0; i <= 10; i++) {
             ItemDTO item = new ItemDTO();
             item.setDescription("test 신발" + i + "입니다.");
-            item.setName("test 신발" + i);
+            item.setItemName("test 신발" + i);
             item.setPrice(40000 + i);
 //            item.setCreateTime(LocalDateTime.now());
 

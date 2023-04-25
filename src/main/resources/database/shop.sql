@@ -1,4 +1,5 @@
 USE shop;
+
 DROP TABLE member;
 DROP TABLE item;
 DROP TABLE item_img;
