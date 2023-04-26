@@ -48,7 +48,7 @@ public class ItemImgService {
             imgName = fileService.saveFile(itemImgPath, oriImgName,
                                         imgFile.getBytes());
             //저장한 상품 이미지를 불러올 경로를 설정
-            imgUrl = "/images/upload/" + imgName;
+            imgUrl = "/images/item/" + imgName;
         }
 
         //상품 이미지 정보 저장

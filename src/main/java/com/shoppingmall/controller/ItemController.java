@@ -126,7 +126,7 @@ public class ItemController {
 
     /*
      상품 관리 화면 이동 및 조회한 상품 데이터를 화면에 전달
-     한 페이지당 총 3개의 상품만 보여주도록 설정
+     한 페이지당 총 5개의 상품만 보여주도록 설정
 
      value 에 상품 관리 화면 진입시 URL에 페이지 번호가 없는 경우와
      페이지 번호가 있는 경우 2가지를 매핑
@@ -142,7 +142,7 @@ public class ItemController {
          URL 경로에 페이지 번호가 있으면 해당 페이지를 조회하도록 세팅하고, 페이지 번호가
          없으면 0페이지를 조회하도록 함.
          */
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         Page<Item> items =
                 //조회 조건과 페이징 정보를 파라미터로 넘겨서 Page<Item> 객체를 반환 받음.
                 itemService.getAdminItemPage(searchDTO, pageable);

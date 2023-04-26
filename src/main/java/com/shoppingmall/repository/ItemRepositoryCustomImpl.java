@@ -4,9 +4,12 @@ import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shoppingmall.constant.ItemSellStatus;
 import com.shoppingmall.dto.ItemSearchDTO;
+import com.shoppingmall.dto.MainItemDTO;
+import com.shoppingmall.dto.QMainItemDTO;
 import com.shoppingmall.entity.Item;
 import com.shoppingmall.entity.QItem;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.shoppingmall.entity.QItemImg;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +19,10 @@ import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * JPA 의 Querydsl 을 사용하기 위해 사용자 정의 인터페이스 구현체인
+ * ItemRepositoryCustomImpl 클래스를 생성 인터페이스에 정의된 메소드를 구현
+ */
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
     //동적으로 쿼리를 생성하기 위해 JPAQyeryFactory 클래스를 사용
@@ -73,13 +80,13 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
             return QItem.item.itemName.like("%" + searchQuery + "%");
         }
         else if (StringUtils.equals("registeredWorker", searchBy)) {
-            return QItem.item.registeredWorker.like("%" + searchQuery + "%");
+            return QItem.item.registeredBy.like("%" + searchQuery + "%");
         }
         return null;
     }
 
     @Override
-    public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable) {
+    public Page<Item> getAdminItemPage(ItemSearchDTO searchDTO, Pageable pageable) {
         /*
          Querydsl 시작
          queryFactory를 이용해서 쿼리를 생성.
@@ -94,10 +101,10 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
          */
         QueryResults<Item> results = queryFactory
                 .selectFrom(QItem.item)
-                .where(regDtsAfter(itemSearchDTO.getSearchDateType()),
-                searchSellStatusEq(itemSearchDTO.getSearchSellStatus()),
-        searchByLike(itemSearchDTO.getSearchBy(),
-        itemSearchDTO.getSearchQuery()))
+                .where(regDtsAfter(searchDTO.getSearchDateType()),
+                searchSellStatusEq(searchDTO.getSearchSellStatus()),
+        searchByLike(searchDTO.getSearchBy(),
+        searchDTO.getSearchQuery()))
                 .orderBy(QItem.item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -108,4 +115,51 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         //조회한 데이터를 Page 클래스의 구현체 PageImpl 객체로 반환
         return new PageImpl<>(content, pageable, total);
     }
+
+    //검색어가 null 이 아니면 상품명에 해당 검색어가 포함되는 상품을 조회하는 조건을 반환함.
+    private BooleanExpression itemNameLike(String searchQuery) {
+        return StringUtils.isEmpty(searchQuery) ?
+                null : QItem.item.itemName.like("%" + searchQuery + "%");
+    }
+
+    /*
+     메인 페이지의 데이터를 불러올 메소드
+     */
+    @Override
+    public Page<MainItemDTO> getMainItemPage(ItemSearchDTO searchDTO, Pageable pageable) {
+
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        /*
+         QMainItemDTO 의 생성자에 반환할 값들을 넣어줌. @QueryProjection 을 사용하면
+         DTO 로 바로 조회가 가능함. 엔티티 조회 후 DTO 로 변환하는 과정을 줄일 수 있음.
+         */
+        QueryResults<MainItemDTO> results = queryFactory
+                .select(
+                        new QMainItemDTO(
+                        item.id,
+                        item.itemName,
+                        item.description,
+                        itemImg.imgUrl,
+                        item.price)
+                )
+                .from(itemImg)
+                //itemImg 와 item 을 내부 join 함.
+                .join(itemImg.item, item)
+                //상품 이미지의 경우 대표 상품 이미지만 불러옴.
+                .where(itemImg.repimgYn.eq("Y"))
+                .where(itemNameLike(searchDTO.getSearchQuery()))
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainItemDTO> content = results.getResults();
+        long total = results.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.shoppingmall.repository;
 
 import com.shoppingmall.dto.ItemSearchDTO;
+import com.shoppingmall.dto.MainItemDTO;
 import com.shoppingmall.entity.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,5 +22,10 @@ public interface ItemRepositoryCustom {
      반환 데이터로 Page<Item> 객체를 반환
      */
     Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO, Pageable pageable);
+
+    /*
+     메인 페이지에 보여줄 상품 리스트를 가져오는 메소드
+     */
+    Page<MainItemDTO> getMainItemPage(ItemSearchDTO searchDTO, Pageable pageable);
 
 }

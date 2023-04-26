@@ -3,6 +3,7 @@ package com.shoppingmall.service;
 import com.shoppingmall.dto.ItemDTO;
 import com.shoppingmall.dto.ItemImgDTO;
 import com.shoppingmall.dto.ItemSearchDTO;
+import com.shoppingmall.dto.MainItemDTO;
 import com.shoppingmall.entity.Item;
 import com.shoppingmall.entity.ItemImg;
 import com.shoppingmall.repository.ItemImgRepository;
@@ -115,6 +116,13 @@ public class ItemService {
     public Page<Item> getAdminItemPage(ItemSearchDTO itemSearchDTO,
                                        Pageable pageable) {
         return itemRepository.getAdminItemPage(itemSearchDTO, pageable);
+    }
+
+    /* 메인 페이지에 상품 데이터를 보여주기 위한 메소드 */
+    @Transactional(readOnly = true)
+    public Page<MainItemDTO> getMainItemPage(ItemSearchDTO searchDTO,
+                                             Pageable pageable) {
+        return itemRepository.getMainItemPage(searchDTO, pageable);
     }
 
 
