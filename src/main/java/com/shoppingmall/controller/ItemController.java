@@ -74,7 +74,7 @@ public class ItemController {
 
     /* 상품 상세 페이지(수정 폼) */
     @GetMapping(value = "/admin/item/{itemId}")
-    public String itemInfoPage(@PathVariable("itemId") Long itemId, Model model) {
+    public String inquiryItemInfoPage(@PathVariable("itemId") Long itemId, Model model) {
 
         try {
             ItemDTO itemDTO = itemService.findItemInfo(itemId);
@@ -92,7 +92,7 @@ public class ItemController {
 
     /* 상품 업데이트 처리 */
     @PostMapping(value = "/admin/item/{itemId}")
-    public String itemUpdateProcess(@Valid ItemDTO itemDTO, BindingResult bindingResult,
+    public String itemModifyProcess(@Valid ItemDTO itemDTO, BindingResult bindingResult,
                                     @RequestParam("itemImgFile") List<MultipartFile> imgFileList,
                                     Model model) {
 
@@ -132,7 +132,7 @@ public class ItemController {
      페이지 번호가 있는 경우 2가지를 매핑
      */
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
-    public String itemManagePage(ItemSearchDTO searchDTO,
+    public String manageItemPage(ItemSearchDTO searchDTO,
                                  @PathVariable("page")Optional<Integer> page, Model model) {
 
         /*
@@ -155,6 +155,15 @@ public class ItemController {
 
         return "item/manageItem";
 
+    }
+
+    @GetMapping(value = "/item/{itemId}")
+    public String describeItemPage(@PathVariable("itemId") Long itemId,
+                                   Model model) {
+        ItemDTO itemDTO = itemService.findItemInfo(itemId);
+        model.addAttribute("item", itemDTO);
+
+        return "item/describeItem";
     }
 
 

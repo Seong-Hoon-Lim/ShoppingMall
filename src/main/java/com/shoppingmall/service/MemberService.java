@@ -29,12 +29,12 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
 
-    private final MemberRepository repository;
+    private final MemberRepository memberRepository;
 
     /* 회원 등록 기능 */
     public Member saveMember(Member member) {
         validateDuplicateMember(member);
-        return repository.save(member);
+        return memberRepository.save(member);
     }
 
     /*
@@ -42,7 +42,7 @@ public class MemberService implements UserDetailsService {
      내부에서 실행될 메소드로 private 접근제어자 설정
      */
     private void validateDuplicateMember(Member member) {
-        Member findMember = repository.findMemberByEmail(member.getEmail());
+        Member findMember = memberRepository.findMemberByEmail(member.getEmail());
         if (findMember != null) {
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
@@ -56,7 +56,7 @@ public class MemberService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Member member = repository.findMemberByEmail(email);
+        Member member = memberRepository.findMemberByEmail(email);
 
         if (member == null) {
             throw new UsernameNotFoundException(email);

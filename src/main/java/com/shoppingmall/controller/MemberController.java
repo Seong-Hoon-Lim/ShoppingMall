@@ -70,10 +70,10 @@ public class MemberController {
         return "member/loginMember";
     }
 
-    @PostMapping(value = "login")
-    public String loginProcess() {
-
-        return "redirect:/";
-    }
+//    @PostMapping(value = "login")
+//    public String loginProcess() {
+//
+//        return "redirect:/";
+//    }
 
 }
