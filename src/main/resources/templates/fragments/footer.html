@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+    <!-- 사용자 CSS 추가 -->
+    <th:block layout:fragment="css">
+
+    </th:block>
 
     <div class="footer" th:fragment="footer">
         <footer class="page-footer font-small cyan darken-3">
