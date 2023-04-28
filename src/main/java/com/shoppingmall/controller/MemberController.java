@@ -61,6 +61,8 @@ public class MemberController {
     @GetMapping(value = "login")
     public String loginPage() {
         return "member/loginMember";
+
+
     }
 
     /* 로그인 에러 처리 (GET 방식)*/
