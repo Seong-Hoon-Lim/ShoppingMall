@@ -38,6 +38,7 @@ public interface ItemRepository extends JpaRepository<Item, Long>,
      */
     List<Item> findItemByItemName(String itemName);
 
+
     /**
      * 상품명과 상품 상세 설명을 OR 조건을 이용하여
      * 조회하는 쿼리 메소드
