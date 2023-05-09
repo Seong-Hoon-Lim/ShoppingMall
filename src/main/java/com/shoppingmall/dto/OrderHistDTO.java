@@ -30,11 +30,15 @@ public class OrderHistDTO {
 
     public OrderHistDTO(Order order) {
         this.orderId = order.getId();
+        //주문날짜의 경우 yyyy-MM-dd HH:mm 형태로 포맷 수정
         this.orderDate =
                 order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.orderStatus = order.getOrderStatus();
     }
 
+    /*
+     orderItemDTO 객체를 주문 상품 리스트에 추가하는 메소드
+     */
     public void addOrderItemDTO(OrderItemDTO orderItemDTO) {
         orderItemDTOList.add(orderItemDTO);
     }
