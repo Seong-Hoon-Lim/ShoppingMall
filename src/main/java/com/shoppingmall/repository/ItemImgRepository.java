@@ -10,10 +10,22 @@ import java.util.List;
  */
 public interface ItemImgRepository extends JpaRepository<ItemImg, Long> {
 
-    /*
-     상품 이미지 아이디의 오름차순으로 DB를 조회하는 쿼리 메소드로
-     상품 아이디를 매개변수로 가짐
+    /**
+     * 상품 이미지 아이디의 오름차순으로 DB를 조회하는 쿼리 메소드로
+     * 상품 아이디를 매개변수로 가짐
+     * @param itemId
+     * @return
      */
     List<ItemImg> findItemImgByItemIdOrderByIdAsc(Long itemId);
+
+
+    /**
+     * 상품의 대표 이미지를 찾는 쿼리 메소드
+     * 구매 이력 페이지에서 주문 상품의 대표 이미지를 보여주기 위한 기능
+     * @param itemId
+     * @param repimgYn
+     * @return
+     */
+    ItemImg findItemImgByIdAndRepimgYn(Long itemId, String repimgYn);
 
 }

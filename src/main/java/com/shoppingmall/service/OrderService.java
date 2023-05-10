@@ -1,14 +1,18 @@
 package com.shoppingmall.service;
 
 import com.shoppingmall.dto.OrderDTO;
+import com.shoppingmall.dto.OrderHistDTO;
 import com.shoppingmall.entity.Item;
 import com.shoppingmall.entity.Member;
 import com.shoppingmall.entity.Order;
 import com.shoppingmall.entity.OrderItem;
+import com.shoppingmall.repository.ItemImgRepository;
 import com.shoppingmall.repository.ItemRepository;
 import com.shoppingmall.repository.MemberRepository;
 import com.shoppingmall.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +31,7 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
+    private final ItemImgRepository itemImgRepository;
 
     /* 주문 로직 */
     public Long order(OrderDTO orderDTO, String email) {
@@ -50,6 +55,20 @@ public class OrderService {
         
         return order.getId();
         
+    }
+
+    /* 주문 목록을 조회 */
+    @Transactional(readOnly = true)
+    public Page<OrderHistDTO> getOrderList(String email, Pageable pageable) {
+
+        List<Order> orderList = orderRepository.findAllOrdersByEmail(email, pageable);
+        Long totalCount = orderRepository.countOrderByEmail(email);
+
+        List<OrderHistDTO> orderHistDTOList = new ArrayList<>();
+
+        for (Order order : orderList) {
+
+        }
     }
 
 
